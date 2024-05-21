@@ -1,11 +1,11 @@
 const express = require("express");
 
-const { getAll, get, add, replace, remove } = require('../data/event');
+const { getAll, get, add, replace, remove } = require("../data/event");
 const {
   isValidText,
   isValidDate,
   isValidImageUrl,
-} = require('../util/validation');
+} = require("../util/validation");
 
 const router = express.Router();
 
@@ -15,6 +15,8 @@ router.get("/", async (req, res, next) => {
     setTimeout(() => {
       res.json({ events: events });
     }, 1500);
+
+    // res.json({ events: events });
   } catch (error) {
     next(error);
   }
@@ -59,6 +61,11 @@ router.post("/", async (req, res, next) => {
 
   try {
     await add(data);
+
+    // setTimeout(() => {
+    //   res.status(201).json({ message: "Event saved.", event: data });
+    // }, 1500);
+
     res.status(201).json({ message: "Event saved.", event: data });
   } catch (error) {
     next(error);
